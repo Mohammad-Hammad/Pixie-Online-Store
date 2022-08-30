@@ -1,0 +1,48 @@
+﻿@model IEnumerable<WebApplication11.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table id="customerstable" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Fname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Lname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Imagename)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Lname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Imagename)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CusId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CusId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CusId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

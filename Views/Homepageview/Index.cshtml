@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WebApplication11.Models.Productpage>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/homepagelayout.cshtml";
+}
+<!-- Banner Starts Here -->
+  <div class="banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="caption">
+            <h2>Pixie Electronics Store</h2>
+            <div class="line-dec"></div>
+            <p>Pixie Electronics Store is the only store you cant trust because of the <strong>Best</strong>
+              Service and customer care
+              <br><br>We care about our customers <a rel="nofollow" href="#">Pixie</a>
+              will provide the best shopping experience you'll ever had
+              to <a rel="nofollow" href="#">Pixie</a>.
+            </p>
+            <div class="main-button">
+              <a href="products.html">Order Now!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Banner Ends Here -->
+
+  <!-- Featured Starts Here -->
+  <div class="featured-items">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <div class="line-dec"></div>
+            <h1>Featured Items</h1>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="owl-carousel owl-theme">
+              @foreach(var item in Model)
+                    {
+                        <div class="featured-item">
+                <img src="~/productpageimages/@item.Imagename"
+                  width="30px" height="350px" alt="">
+                <h4>@item.Productname</h4>
+                <h6>@item.Productprice$</h6>
+              </div>
+                    }
+                </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Featred Ends Here -->
+

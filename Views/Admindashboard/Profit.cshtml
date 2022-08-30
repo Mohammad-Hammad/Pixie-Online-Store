@@ -1,0 +1,91 @@
+﻿@model Tuple<IEnumerable<WebApplication11.Models.User>, IEnumerable<WebApplication11.Models.Order>>
+@{
+    ViewData["Title"] = "Profit";
+    Layout = "~/Views/Shared/_admindashboard.cshtml";
+    var totalsale = ViewBag.Totalsale;
+    var totalsalary = ViewBag.Totalsalary;
+}
+<style>
+    .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+}
+</style>
+<h1><center>Profits</center></h1>
+<table id="Profitstable" class="styled-table">
+    <tr>
+        <td></td>
+    </tr>
+    <tr>
+        <td>Total of Sales</td>
+        <td>@totalsale</td>
+    </tr>
+    <tr>
+        <td>Total of Salaries</td>
+        <td>@totalsalary</td>
+    </tr>
+    <tr>
+        <td>Profits</td>
+        <td>@(totalsale-totalsalary)</td>
+    </tr>
+</table>
+<table >
+    <thead>
+        <tr>
+            <th>
+                Salaries
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Item1) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<table >
+    <thead>
+        <tr>
+            <th>
+                Sales
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Item2) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Totalprice)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script src="~/jsexcel/table2excel.js"></script>
+<button id="downloadexcel" class="btn btn-success text-white ">Excel</button>
+    <button id="export1" onclick="exportTableToCSV('members.csv')" class="btn btn-danger" hidden>CSV</button>
+    <button class="btn btn-danger" onclick="printTable();"><span class="glyphicon glyphicon-print"></span> Print</button>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="tableData">
+                <thead>
+<script>
+    document.getElementById('downloadexcel').addEventListener('click',function()
+    {
+        var table2excel = new Table2Excel();
+  table2excel.export(document.querySelectorAll("#Profitstable"));
+    });
+</script>
+
+
+

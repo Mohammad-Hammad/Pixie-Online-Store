@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebApplication11.Models.Order>
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_accountantdashboard.cshtml";
+}
+
+<h1>Search Reports</h1>
+<center>
+    <h1>Search</h1>
+    <p>
+            <form asp-controller="Accountantdashboard" asp-action="SearchReports" enctype="multipart/form-data">
+            <input type="date" name="start"/>
+            <input type="date" name="end" />
+            <input type="submit" name="submit" value="Search"/>
+            </form>
+       
+    </p>
+<table id="reports" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Totalprice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderAt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Totalprice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderAt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.CusId)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<script src="~/jsexcel/table2excel.js"></script>
+<button id="downloadexcel" class="btn btn-success text-white ">Excel</button>
+    <button id="export1" onclick="exportTableToCSV('members.csv')" class="btn btn-danger" hidden>CSV</button>
+    <button class="btn btn-danger" onclick="printTable();"><span class="glyphicon glyphicon-print"></span> Print</button>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table table-hover" id="tableData">
+                <thead>
+<script>
+    document.getElementById('downloadexcel').addEventListener('click',function()
+    {
+        var table2excel = new Table2Excel();
+  table2excel.export(document.querySelectorAll("#reports"));
+    });
+</script>
+
+
